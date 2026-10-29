@@ -33,7 +33,37 @@ return { parcelles, cultures, releves, recoltes };
 // Exemple : creerReleve('p07', '64', '29', '2026-10-29')
 //   → { parcelle: 'P07', date: '2026-10-29', humidite: 64, temperature: 29 }
 export function creerReleve(parcelle, humiditeTexte, temperatureTexte, date) {
-  throw new Error("TODO Membre 4 : coder creerReleve dans src/donnees.js");
+   if (typeof parcelle !== `string` || parcelle.trim() === ``){
+
+  throw new Error(`la parcelle est obligatoire`);
+}
+const humidite = Number(humiditeTexte);
+if (
+  humidite === `` ||
+  (typeof humiditeTexte === `string` && humiditeTexte.trim() === ``) ||
+  !Number.isFinite(humidite) ||
+  humidite < 0 ||
+  humidite > 100
+)
+{
+  throw new Error(`l'humidité doit etre un nombre compris entre 0 et 100`);
+}
+const temperature = Number(temperatureTexte);
+if (
+  temperatureTexte === `` ||
+  (typeof temperatureTexte === `string` && temperatureTexte.trim() === ``) ||
+  !Number.isFinite(temperature)
+){
+  throw new Error(`la temperature doit etre un nombre`);
+}
+
+
+return {
+  parcelle: parcelle.trim().toUpperCase(),
+  date,
+  humidite,
+  temperature,
+};
 }
 
 // Ajoute le relevé à la fin du fichier JSON, enregistre le fichier,
