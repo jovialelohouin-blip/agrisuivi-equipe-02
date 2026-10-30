@@ -9,9 +9,12 @@ export function relevesDeParcelle(releves, idParcelle) {
 // Renvoie la moyenne des humidités, arrondie à l'entier le plus proche.
 // Liste vide : null (on ne peut pas calculer de moyenne).
 export function moyenneHumidite(releves) {
-  throw new Error(
-    "TODO Membre 2 : coder moyenneHumidite dans src/irrigation.js",
-  );
+  if (releves.length === 0) {
+    return null;
+  }
+
+  const total = releves.reduce((somme, releve) => somme + releve.humidite, 0);
+  return Math.round(total / releves.length);
 }
 
 // Renvoie 'INCONNU', 'ARROSER', 'DRAINER' ou 'OK'.
