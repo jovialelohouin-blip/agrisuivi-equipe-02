@@ -17,6 +17,8 @@ export function trouverParcelle(parcelles, id) {
 
 // Renvoie un nouveau tableau avec seulement les parcelles de cette culture.
 export function parcellesParCulture(parcelles, culture) {
+    return parcelles.filter((parcelle)=>parcelle.culture === culture);
+
     
 }
 
