@@ -37,6 +37,11 @@ test('revenu multiplie les kilos par le prix', () => {
   assert.equal(revenu(400, 2000), 800000);
 });
 
+test('rendement refuse une surface négative', () => {
+  assert.throws(() => rendement(100, -2), RangeError);
+});
+
+
 test('bilanRecoltes produit une ligne par parcelle', () => {
   assert.deepEqual(bilanRecoltes(parcelles, recoltes, cultures), [
     { id: 'A1', producteur: 'Ama', culture: 'manioc', kg: 8000, rendement: 4000, revenu: 800000 },

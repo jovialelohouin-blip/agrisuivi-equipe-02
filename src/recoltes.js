@@ -29,7 +29,7 @@ export function revenu(kg, prixKg) {
 // Renvoie une ligne de bilan par parcelle, dans le même ordre que parcelles.
 // Chaque ligne : { id, producteur, culture, kg, rendement, revenu }
 export function bilanRecoltes(parcelles, recoltes, cultures) {
-  return parcelles.map((parcelle) => {
+  return parcelles.map((parcelle) => {  
     const kg = totalRecolte(recoltes, parcelle.id);
     const culture = cultures.find(
       (element) => element.code === parcelle.culture,
@@ -50,4 +50,9 @@ export function bilanRecoltes(parcelles, recoltes, cultures) {
 // Le tableau reçu ne doit pas changer d'ordre.
 export function classerParRevenu(bilan) {
   return [...bilan].sort((a, b) => b.revenu - a.revenu);
+}
+
+//Bilan rendement
+export function classerParRendement(bilan) {
+  return [...bilan].sort((a, b) => b.rendement - a.rendement);
 }
