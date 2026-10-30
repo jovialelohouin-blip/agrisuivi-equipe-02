@@ -3,6 +3,10 @@
 
 // Renvoie le total des kilos récoltés sur une parcelle. Aucune récolte : 0.
 export function totalRecolte(recoltes, idParcelle) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 786679ece76947fbd434483799924b81a049e5f0
   return recoltes
     .filter((recolte) => recolte.parcelle === idParcelle)
     .reduce((total, recolte) => total + recolte.kg, 0);
@@ -12,10 +16,19 @@ export function totalRecolte(recoltes, idParcelle) {
 // Une surface nulle ou négative est une erreur : on lance une RangeError.
 export function rendement(kg, surface) {
   if (surface <= 0) {
+<<<<<<< HEAD
     throw new RangeError('La surface doit être supérieure à 0');
   }
 
   return Math.round(kg / surface);
+=======
+    throw new RangeError("La surface doit être supérieure à 0");
+  } else{
+ 
+    return Math.round(kg / surface);
+  }
+
+>>>>>>> 786679ece76947fbd434483799924b81a049e5f0
 }
 
 // Renvoie le revenu estimé en FCFA.
@@ -27,18 +40,30 @@ export function revenu(kg, prixKg) {
 // Chaque ligne : { id, producteur, culture, kg, rendement, revenu }
 export function bilanRecoltes(parcelles, recoltes, cultures) {
   return parcelles.map((parcelle) => {
+<<<<<<< HEAD
     const culture = cultures.find((element) => element.code === parcelle.culture);
     const kg = totalRecolte(recoltes, parcelle.id);
     const rendementParParcelle = rendement(kg, parcelle.surface);
     const montant = revenu(kg, culture.prixKg);
+=======
+    const kg = totalRecolte(recoltes, parcelle.id);
+    const culture = cultures.find(
+      (element) => element.code === parcelle.culture,
+    );
+>>>>>>> 786679ece76947fbd434483799924b81a049e5f0
 
     return {
       id: parcelle.id,
       producteur: parcelle.producteur,
       culture: parcelle.culture,
       kg,
+<<<<<<< HEAD
       rendement: rendementParParcelle,
       revenu: montant,
+=======
+      rendement: rendement(kg, parcelle.surface),
+      revenu: revenu(kg, culture.prixKg),
+>>>>>>> 786679ece76947fbd434483799924b81a049e5f0
     };
   });
 }
