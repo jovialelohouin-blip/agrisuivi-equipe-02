@@ -158,11 +158,12 @@ La date de la première ligne est celle du jour. Le formateur testera aussi votr
 
 ## Notre équipe
 
-| Rôle                  | Prénom et nom | Compte GitHub |
-| --------------------- | ------------- | ------------- |
-| Membre 1 — Parcelles  |               |               |
-| Membre 2 — Irrigation |               |               |
-| Membre 3 — Récoltes   |               |               |
-| Membre 4 — Données    |               |               |
-#   a g r i s u i v i - e q u i p e - 0 2  
+| Rôle                  | Prénom et nom                       | Compte GitHub           |
+| --------------------- | ---------------------------------   | --------------------    |
+| Membre 1 — Parcelles  |LOHOUIN LOU FRESHNELLE MARIE JOVIALE |jovialelohouin-blip      |
+| Membre 2 — Irrigation |KOUASSI KOBENAN ROMUALD              |Kobenangit               |
+| Membre 3 — Récoltes   |KOUASSI SALOMON                      |edouardsalomonkouassi-cmd|
+| Membre 4 — Données    |KOUAKOU KOUAKOU JANVIER              |Osmose24                 |
+#   a g r i s u i v i - e q u i p e - 0 2 
+ 
  

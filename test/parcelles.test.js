@@ -42,5 +42,8 @@ test('resumeParCulture compte les parcelles et additionne les surfaces', () => {
   assert.deepEqual(resumeParCulture(parcelles), {
     cacao: { nombre: 2, surface: 2.5 },
     riz: { nombre: 1, surface: 1.5 },
-  });
+  });});
+test(`resumeParCulture d\'une liste vide vaut un objet{}`,()=>{
+  assert.deepEqual(resumeParCulture(), {});
 });
+

@@ -4,6 +4,7 @@
 // Renvoie une promesse qui se résout après capteur.delai millisecondes avec
 // { parcelle, humidite }, ou qui est rejetée si le capteur n'est pas en ligne.
 export function interrogerCapteur(capteur) {
+  return
   throw new Error("TODO Bonus : coder interrogerCapteur dans src/station.js");
 }
 
