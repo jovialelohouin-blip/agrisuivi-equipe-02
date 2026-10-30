@@ -49,7 +49,5 @@ export function bilanRecoltes(parcelles, recoltes, cultures) {
 // Renvoie une COPIE du bilan, triée du plus grand revenu au plus petit.
 // Le tableau reçu ne doit pas changer d'ordre.
 export function classerParRevenu(bilan) {
-  throw new Error(
-    "TODO Membre 3 : coder classerParRevenu dans src/recoltes.js",
-  );
+  return [...bilan].sort((a, b) => b.revenu - a.revenu);
 }
