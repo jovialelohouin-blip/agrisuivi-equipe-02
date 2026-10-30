@@ -1,72 +1,66 @@
-# Bonus — La station connectée
+/**
+ * 1. Interroge un capteur et renvoie une promesse.
+ * Résout avec { parcelle, humidite } si en ligne, rejette avec une Error sinon.
+ * 
+ * @param {Object} capteur - Objet capteur ({ id, parcelle, delai, enLigne, humidite })
+ * @returns {Promise<Object>}
+ */
+export function interrogerCapteur(capteur) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (capteur.enLigne) {
+        resolve({
+          parcelle: capteur.parcelle,
+          humidite: capteur.humidite
+        });
+      } else {
+        reject(new Error(`Capteur ${capteur.id} hors ligne`));
+      }
+    }, capteur.delai);
+  });
+}
 
-**Votre fichier :** `src/station.js` · **Vos tests :** `npm run test:station` (5 tests)
+/**
+ * 2. Interroge un capteur sans jamais rejeter la promesse.
+ * Renvoie { parcelle, humidite } en cas de succès, ou { parcelle, erreur } en cas d'échec.
+ * 
+ * @param {Object} capteur 
+ * @returns {Promise<Object>}
+ */
+export async function interrogerSansPlanter(capteur) {
+  try {
+    const resultat = await interrogerCapteur(capteur);
+    return resultat;
+  } catch (err) {
+    return {
+      parcelle: capteur.parcelle,
+      erreur: err.message
+    };
+  }
+}
 
-À faire **après** les 38 tests verts. Ce bonus est ouvert à toute l'équipe.
+/**
+ * 3a. Interroge les capteurs un par un (séquentiellement) à l'aide d'une boucle for...of.
+ * 
+ * @param {Array} capteurs - Tableau de capteurs
+ * @returns {Promise<Array>} - Tableau des résultats dans l'ordre
+ */
+export async function releverUnParUn(capteurs) {
+  const resultats = [];
+  for (const capteur of capteurs) {
+    const res = await interrogerSansPlanter(capteur);
+    resultats.push(res);
+  }
+  return resultats;
+}
 
-## L'idée
-
-Dans un vrai champ, un capteur ne répond pas tout de suite : il faut attendre le réseau. Certains capteurs tombent en panne ou n'ont plus de batterie. Le fichier `donnees/capteurs.json` simule quatre capteurs :
-
-```js
-{ id: 'C-P01', parcelle: 'P01', delai: 800, enLigne: true, humidite: 54 }
-{ id: 'C-P05', parcelle: 'P05', delai: 600, enLigne: false, humidite: null }
-```
-
-`delai` est le temps de réponse en millisecondes. `enLigne: false` veut dire que le capteur ne répond pas.
-
-## 1. `interrogerCapteur(capteur)` — fabriquer une promesse
-
-**Renvoie :** une **promesse** qui, après `capteur.delai` millisecondes :
-
-- se **résout** avec `{ parcelle, humidite }` si le capteur est en ligne ;
-- est **rejetée** avec ``new Error(`Capteur ${capteur.id} hors ligne`)`` sinon.
-
-<details><summary>Aide</summary>
-
-```js
-return new Promise((resolve, reject) => {
-  setTimeout(() => {
-    // si le capteur est en ligne : resolve(...)
-    // sinon : reject(...)
-  }, capteur.delai);
-});
-```
-
-</details>
-
-## 2. `interrogerSansPlanter(capteur)` — attraper le rejet
-
-Même travail, mais la promesse n'est **jamais rejetée**. En cas d'erreur, elle renvoie `{ parcelle, erreur }`, où `erreur` est le **message** de l'erreur.
-
-<details><summary>Aide</summary>
-
-`async`, puis `try { return await interrogerCapteur(capteur); } catch (erreur) { ... }`. Le `await` est indispensable ici : sans lui, le `catch` ne voit pas le rejet.
-</details>
-
-## 3. `releverUnParUn(capteurs)` et `releverEnParallele(capteurs)`
-
-Les deux renvoient le même tableau de résultats, **dans l'ordre des capteurs**. La différence, c'est le temps d'attente :
-
-- **Un par un** : une boucle `for...of` avec `await` à chaque tour. On attend chaque capteur avant de passer au suivant.
-- **En parallèle** : on lance toutes les demandes avec `map`, puis `Promise.all` attend qu'elles soient toutes terminées.
-
-## Voir le résultat
-
-```powershell
-node app.js station
-```
-
-```text
-Interrogation de 4 capteurs, l'un après l'autre...
-  terminé en 3604 ms
-Interrogation des mêmes capteurs, en parallèle...
-  terminé en 1201 ms
-```
-
-**Question à préparer pour la présentation :** pourquoi environ 3 600 ms dans un cas et 1 200 ms dans l'autre ? Retrouvez ces deux nombres à partir des délais de `capteurs.json`.
-
-## Encore plus loin
-
-- Remplacez `interrogerSansPlanter` par `Promise.allSettled` dans `releverEnParallele`. Comparez les résultats.
-- Ajoutez une commande qui enregistre les mesures reçues dans `releves.json` avec `ajouterReleve` (Membre 4).
+/**
+ * 3b. Interroge tous les capteurs en même temps (en parallèle) avec Promise.all.
+ * 
+ * @param {Array} capteurs - Tableau de capteurs
+ * @returns {Promise<Array>} - Tableau des résultats dans l'ordre
+ */
+export async function releverEnParallele(capteurs) {
+  const promesses = capteurs.map(capteur => interrogerSansPlanter(capteur));
+  return await Promise.all(promesses);
+}

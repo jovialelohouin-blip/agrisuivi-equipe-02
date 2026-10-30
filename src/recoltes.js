@@ -3,30 +3,73 @@
 
 // Renvoie le total des kilos récoltés sur une parcelle. Aucune récolte : 0.
 export function totalRecolte(recoltes, idParcelle) {
-  throw new Error("TODO Membre 3 : coder totalRecolte dans src/recoltes.js");
+<<<<<<< HEAD
+=======
+
+>>>>>>> 786679ece76947fbd434483799924b81a049e5f0
+  return recoltes
+    .filter((recolte) => recolte.parcelle === idParcelle)
+    .reduce((total, recolte) => total + recolte.kg, 0);
 }
 
 // Renvoie le rendement en kg par hectare, arrondi à l'entier le plus proche.
 // Une surface nulle ou négative est une erreur : on lance une RangeError.
 export function rendement(kg, surface) {
-  throw new Error("TODO Membre 3 : coder rendement dans src/recoltes.js");
+  if (surface <= 0) {
+<<<<<<< HEAD
+    throw new RangeError('La surface doit être supérieure à 0');
+  }
+
+  return Math.round(kg / surface);
+=======
+    throw new RangeError("La surface doit être supérieure à 0");
+  } else{
+ 
+    return Math.round(kg / surface);
+  }
+
+>>>>>>> 786679ece76947fbd434483799924b81a049e5f0
 }
 
 // Renvoie le revenu estimé en FCFA.
 export function revenu(kg, prixKg) {
-  throw new Error("TODO Membre 3 : coder revenu dans src/recoltes.js");
+  return kg * prixKg;
 }
 
 // Renvoie une ligne de bilan par parcelle, dans le même ordre que parcelles.
 // Chaque ligne : { id, producteur, culture, kg, rendement, revenu }
 export function bilanRecoltes(parcelles, recoltes, cultures) {
-  throw new Error("TODO Membre 3 : coder bilanRecoltes dans src/recoltes.js");
+  return parcelles.map((parcelle) => {
+<<<<<<< HEAD
+    const culture = cultures.find((element) => element.code === parcelle.culture);
+    const kg = totalRecolte(recoltes, parcelle.id);
+    const rendementParParcelle = rendement(kg, parcelle.surface);
+    const montant = revenu(kg, culture.prixKg);
+=======
+    const kg = totalRecolte(recoltes, parcelle.id);
+    const culture = cultures.find(
+      (element) => element.code === parcelle.culture,
+    );
+>>>>>>> 786679ece76947fbd434483799924b81a049e5f0
+
+    return {
+      id: parcelle.id,
+      producteur: parcelle.producteur,
+      culture: parcelle.culture,
+      kg,
+<<<<<<< HEAD
+      rendement: rendementParParcelle,
+      revenu: montant,
+=======
+      rendement: rendement(kg, parcelle.surface),
+      revenu: revenu(kg, culture.prixKg),
+>>>>>>> 786679ece76947fbd434483799924b81a049e5f0
+    };
+  });
 }
 
 // Renvoie une COPIE du bilan, triée du plus grand revenu au plus petit.
 // Le tableau reçu ne doit pas changer d'ordre.
 export function classerParRevenu(bilan) {
-  throw new Error(
-    "TODO Membre 3 : coder classerParRevenu dans src/recoltes.js",
-  );
+  return [...bilan].sort((a, b) => b.revenu - a.revenu);
 }

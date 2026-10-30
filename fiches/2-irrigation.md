@@ -99,3 +99,13 @@ Attendu : P02 et P04 `ARROSER`, P05 et P08 `DRAINER`, P07 `INCONNU`, les autres 
 
 - Pourquoi `moyenneHumidite([])` renvoie-t-elle `null` et pas `0` ? Que se passerait-il avec `0` ?
 - Pourquoi l'ordre des `if` compte-t-il dans `etatIrrigation` ?
+
+
+
+ test('etatIrrigation répond OK à la limite basse du cacao', () => {
+  assert.equal(etatIrrigation(40, cacao), 'OK');
+});
+
+test('etatIrrigation répond OK à la limite haute du cacao', () => {
+  assert.equal(etatIrrigation(70, cacao), 'OK');
+});   
