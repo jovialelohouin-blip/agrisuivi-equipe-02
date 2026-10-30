@@ -1,0 +1,6 @@
+| Rôle                  | Prénom et nom                       | Compte GitHub           |
+| --------------------- | ---------------------------------   | --------------------    |
+| Membre 1 — Parcelles  |LOHOUIN LOU FRESHNELLE MARIE JOVIALE |jovialelohouin-blip      |
+| Membre 2 — Irrigation |KOUASSI KOBENAN ROMUALD              |Kobenangit               |
+| Membre 3 — Récoltes   |KOUASSI SALOMON                      |edouardsalomonkouassi-cmd|
+| Membre 4 — Données    |KOUAKOU KOUAKOU JANVIER              |Osmose24                 |
